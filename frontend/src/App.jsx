@@ -1,16 +1,28 @@
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react'
+import { SignedIn, SignedOut } from '@clerk/clerk-react'
 import React from 'react'
+import { Routes, Route, Navigate } from 'react-router'
+import HomePage from './pages/HomePage'
+import AuthPage from './pages/AuthPage'
 
 const App = () => {
   return (
-    <header>
-      <SignedOut>
-        <SignInButton mode='modal'/>
-      </SignedOut>
+    <>
+      {/* Signed In Routes */}
       <SignedIn>
-        <UserButton />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/auth" element={<Navigate to="/" replace />} />
+        </Routes>
       </SignedIn>
-    </header>
+
+      {/* Signed Out Routes */}
+      <SignedOut>
+        <Routes>
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="*" element={<Navigate to="/auth" replace />} />
+        </Routes>
+      </SignedOut>
+    </>
   )
 }
 
