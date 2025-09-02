@@ -26,7 +26,7 @@ const HomePage = () => {
   const [activeChannel, setActiveChannel] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const { chatClient, error, isLoading } = useStreamChat();
+  const { chatClient } = useStreamChat();
 
   // set active channel from URL params
   useEffect(() => {
@@ -39,9 +39,9 @@ const HomePage = () => {
     }
   }, [chatClient, searchParams]);
 
-  // todo: handle this with a better component
-  if (error) return <p>Something went wrong...</p>;
-  if (isLoading || !chatClient) return <PageLoader />;
+  // // todo: handle this with a better component
+  // if (error) return <p>Something went wrong...</p>;
+  // if (isLoading || !chatClient) return <PageLoader />;
 
   return (
     <div className="chat-wrapper">
